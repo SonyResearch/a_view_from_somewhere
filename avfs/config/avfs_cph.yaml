@@ -1,0 +1,113 @@
+misc_cfg:
+  # Experiment name (str).
+  experiment_name: "avfs_cph"
+  # Loss value to monitor (str). Options: `ooo_loss`, `sparsity_loss`,
+  # `neg_embed_val_loss`, or `total_loss`.
+  monitor_validation_loss: "total_loss"
+  # Strict loading of the state dict (bool). Choice is irrelevant if not reloading
+  # from a previously saved checkpoint, i.e., when `chkpt_path` and `chkpt_filename`
+  # are both null.
+  model_strict_load: false
+  # Load the optimizer state dict (bool) and resume training. Choice is irrelevant if
+  # not reloading from a previously saved checkpoint, i.e., when `chkpt_path` and
+  # `chkpt_filename` are both null.
+  resume: false
+  # Number of batches to average when logging (int).
+  num_train_batches_to_average: 100
+  # Debug mode (bool).
+  debug: false
+  # Number of training epochs (int).
+  num_epochs: 40
+  # Save model periodically (int).
+  save_every_num_epochs: 5
+
+setup_cfg:
+  # List of devices (list of ints).
+  devices:
+    - 0
+  # Primary device (str), e.g., `cuda:0`, `cuda:1`, `cpu`.
+  primary_device: "cuda:0"
+  # Numpy seed (int) for reproducibility.
+  numpy_seed: 2021
+  # PyTorch seed (int) for reproducibility.
+  pytorch_seed: 2021
+  # Random seed (int) for reproducibility.
+  random_seed: 2021
+  # Use cuDNN backend (bool).
+  cudnn_benchmark: true
+  # Use data parallel (bool). This can be set to `true` if using multiple GPUs for
+  # training.
+  data_parallel: false
+
+model_cfg:
+  # Path to checkpoint if reloading, e.g., `/path/to/checkpoint/dir` (str or null).
+  chkpt_path: "path/to/checkpoint" # Update to reflect your path
+  # Checkpoint filename if reloading, e.g., `best_total_loss.pth` (str or null).
+  chkpt_filename: "checkpoint_name.pth" # Update to reflect your filename
+  # Freeze encoder gradients (bool).
+  freeze_encoder_gradients: true
+  # Freeze mask gradients (bool).
+  freeze_mask_gradients: false
+  # List of dimensions to retain when reloading weights from a checkpoint
+  # (list of ints or null). This can be used for posthoc conditional model training.
+  posthoc_dims: # Update to reflect your chosen dimensions
+    - 0
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+  # Embedding space dimensionality (int).
+  num_output_dims: 128
+
+data_cfg:
+  # Create annotator-specific masks (bool), i.e., for conditional training.
+  create_masks: true
+  # Mask type to use (str or null). Options (str): `gender_id`, `age_group`,
+  # `ancestry_regions`, `ancestry_subregions`, `nationality`, `intersectional`, or
+  # `annotator_id`. If `create_masks` is `false`, then `mask_type` must be null.
+  # Otherwise, if `create_masks` is `true`, then `mask_type` must be one of the valid
+  # mask str options described above.
+  mask_type: "annotator_id"
+  # Proportion of the training set to use for training (float).
+  max_train_subset_prop: 1.0
+
+loss_cfg:
+  # Odd-one-out prediction loss weight (float or int).
+  odd_one_out_prediction_loss_weight: 1.0
+  # Negative embedding values loss weight (float or int). Penalizes negative embedding
+  # values.
+  negative_embedding_values_loss_weight: 0.0
+  # Mask loss weight (float or int). Penalizes large mask values.
+  mask_loss_weight: 0.005
+  # Embeddings sparsity loss weight (float or int). Promotes sparsity.
+  embeddings_sparsity_loss_weight: 0.0
+  # Threshold for counting whether a dimension is active (float or int). This is only
+  # used for logging the number of dimensions with a maximum value greater than
+  # dims_threshold_value. That is, it does not have an effect on training.
+  dims_threshold_value: 0.1
+
+learning_rate_cfg:
+  # Learning rate epoch milestones indicating when to decrease the learning rate
+  # (list of ints or null).
+  learning_rate_milestones: null
+  # Factor to multiply the learning rate by at each milestone (float, int, or null).
+  learning_rate_factor: null
+
+optim_cfg:
+  #  Case-sensitive optimizer name (str), e.g., `Adam` or `SGD`.
+  method: "Adam"
+  # Optimizer learning rate (float).
+  lr: 0.001
+  # Weight decay (float).
+  weight_decay: 0.0
+
+loader_cfg:
+  # Batch size for training (int).
+  train_batch_size: 128
+  # Batch size for validation (int).
+  validation_batch_size: 512
+  # Number of dataloader workers (int).
+  num_workers: 8
+  # Dataloader pin memory (bool).
+  pin_memory: true

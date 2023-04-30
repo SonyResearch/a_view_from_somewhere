@@ -1,0 +1,11 @@
+__pycache__
+
+.DS_STORE
+.mypy_cache
+.ruff_cache
+.idea
+
+**/.ipynb_checkpoints/
+*.toml
+
+client_secrets.json

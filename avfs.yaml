@@ -1,0 +1,23 @@
+name: avfs
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy
+  - pandas
+  - cmake
+  - dlib
+  - pytorch=1.11
+  - torchvision=0.12
+  - pydrive
+  - zip
+  - libarchive
+  - bzip2
+  - scipy
+  - pydrive
+  - conda
+  - jupyter
+  - requests
+  - cudatoolkit=11.3
