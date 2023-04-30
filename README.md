@@ -70,7 +70,9 @@ python download.py --avfs_data
 (The dataset can also be manually downloaded from 
 [here](https://zenodo.org/record/7878655).)
 
-A View From Somewhere dataset documentation can be found [here](docs/DATASHEET.pdf).
+A View From Somewhere dataset documentation (i.e., datasheet) can be found 
+[here](docs/DATASHEET.pdf) and an overview of the dataset's contents can be found 
+[here](docs/AVFS_README.md).
 
 
 #### Images
@@ -108,6 +110,11 @@ in `avfs/config`:
 python train.py --cfg_path avfs/config/<filename>.yaml
 ```
 
+## Privacy
+Annotators that contributed to A View From Somewhere may contact 
+Sony Europe B.V. at Taurusavenue 16, 2132LS Hoofddorp, Netherlands or 
+[privacyoffice.SEU@sony.com](mailto:privacyoffice.SEU@sony.com) to revoke their 
+consent in the future or for certain uses.
 
 ## License
 A View From Somewhere dataset and models are made available under a [Creative Commons 
